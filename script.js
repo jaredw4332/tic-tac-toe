@@ -27,5 +27,16 @@ gameboard.checkArray(1)
 // if statement which checks for a certain class to figure out who's turn it is
 
 const displayController = (() => {
+    const move = (turn, position) => {
+        let target = document.getElementById(position)
+        target.textContent = turn
+        gameboard.move(turn, position)
+    }
 
-})
+    return {
+        move
+    }
+})()
+
+displayController.move('x', 4)
+gameboard.checkArray(4)
