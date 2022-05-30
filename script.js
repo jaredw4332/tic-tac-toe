@@ -4,12 +4,19 @@
 // space on click triggers function which pushes letter to corresponding position in array
 // reset function which loops through array assigning every position to inital number
 
+// gear game towards tying everything together, reacting to button presses etc
 
-const gameboard = (() => {
+const game = (() => {
+
     const gameboardArray = ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
     
-    const move = (turn, position) => gameboardArray.splice(position, 1, turn)
-    const checkArray = (position) => console.log(gameboardArray[position])
+    const move = (position) => {
+        let turn = gameControl.takeTurn()
+        gameboardArray.splice(position, 1, turn)
+        displayController.move(turn, position)
+    }
+
+    const checkArray = (position) => { return gameboardArray[position] }
 
     return {
         move,
@@ -18,25 +25,59 @@ const gameboard = (() => {
 })()
 
 
-gameboard.move('x', 0)
-gameboard.checkArray(0)
-gameboard.move('o', 1)
-gameboard.checkArray(0)
-gameboard.checkArray(1)
-
-// if statement which checks for a certain class to figure out who's turn it is
-
 const displayController = (() => {
+
     const move = (turn, position) => {
         let target = document.getElementById(position)
         target.textContent = turn
-        gameboard.move(turn, position)
     }
 
+    const reset = () => {
+        for (let i = 0; i < 9; i++) {
+            let target = document.getElementById(i)
+            target.textContent = " "
+        }
+    }
+    
+
     return {
-        move
+        move,
+        reset
     }
 })()
 
-displayController.move('x', 4)
-gameboard.checkArray(4)
+//let game control be the actual changing of stuff
+
+const gameControl = (() => {
+    let turn = 0
+
+    const takeTurn = () => {
+        turn += 1
+
+        if(turn % 2 == 0) {
+            return "O"
+        } else {
+            return "X"
+        }
+    }
+
+// following might work, might not
+
+    const disableButton = (id) => {
+        document.getElementById(id).disabled = true
+    }
+
+    const enableButton = (id) => {
+        document.getElementById(id).disabled = false
+    }
+
+    return {
+        takeTurn,
+        disableButton,
+        enableButton
+    }
+})()
+
+// game is currently playable via game.move(position)
+// next step is assigning this to buttons
+// after that, winning logic
