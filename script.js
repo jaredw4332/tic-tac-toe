@@ -13,6 +13,8 @@ const game = (() => {
 
     const reset = () => {
         for (let i = 0; i < 9; i++) {
+            gameboardArray.splice(i, 1, i)
+
             let target = document.getElementById(i)
 
             displayController.reset(target)
@@ -60,13 +62,9 @@ const gameControl = (() => {
         }
     }
 
-    const disableButton = (target) => {
-        target.disabled = true
-    }
+    const disableButton = (target) => { target.disabled = true }
 
-    const enableButton = (target) => {
-        target.disabled = false
-    }
+    const enableButton = (target) => { target.disabled = false }
 
     return {
         takeTurn,
