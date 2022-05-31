@@ -69,7 +69,7 @@ table {
     height: 100vh;
     width: 100vw;
     display: grid;
-    grid-template-rows: min-content min-content;
+    grid-template-rows: min-content min-content min-content;
     justify-content: center;
 }
 
@@ -97,4 +97,24 @@ table {
     font-size: var(--fontsize);
     border-style: none;
     padding: 0%;
+}
+
+#resetButton {
+    background-color: var(--chalkboard);
+    color: var(--chalk);
+    font-family: 'Square Peg', sans-serif;
+    font-size: 60px;
+    font-weight: 700;
+    width: fit-content;
+    justify-self: center;
+    padding: 20px;
+    border-style: none;
+    border-radius: 20px;
+}
+
+#resetButton:hover {
+    text-decoration-skip-ink: none;
+    text-decoration: underline;
+    text-decoration-style: wavy;
+    text-decoration-thickness: 8%;
 }
