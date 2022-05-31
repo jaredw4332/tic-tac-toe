@@ -19,6 +19,7 @@ const game = (() => {
 
             displayController.reset(target)
             gameControl.enableButton(target)
+            gameControl.turnReset()
         }
     }
 
@@ -62,12 +63,15 @@ const gameControl = (() => {
         }
     }
 
+    const turnReset = () => { turn = 0 }
+
     const disableButton = (target) => { target.disabled = true }
 
     const enableButton = (target) => { target.disabled = false }
 
     return {
         takeTurn,
+        turnReset,
         disableButton,
         enableButton
     }
