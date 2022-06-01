@@ -27,13 +27,23 @@ const game = (() => {
     const checkArray = (position) => { return gameboardArray[position] }
 
     const checkWin = (array) => {
-        console.log(array.toString())
         xWin = "X,X,X"
         oWin = "O,O,O"
-        if (array == xWin || array == oWin){
+        if (array == xWin || array == oWin) {
+            win()
             return "end"
         }
     }
+
+    const draw = () => { displayController.updateStatus("Draw!") }
+
+    const win = () => { 
+        displayController.updateStatus("Win!") 
+        for (let i = 0; i < 9; i++) {
+            let target = document.getElementById(i)
+            gameControl.disableButton(target)
+        }  
+    }   
 
     return {
         move,
@@ -46,17 +56,25 @@ const game = (() => {
 
 const displayController = (() => {
 
+    const gameStatus = document.getElementById('gameStatus')
+
     const move = (turn, target) => {
         target.textContent = turn
     }
 
     const reset = (target) => {
         target.textContent = " "
+        gameStatus.textContent = "Placeholder's turn"
     }
-    
+
+    const updateStatus = (string) => {
+        gameStatus.textContent = string
+    }
+
     return {
         move,
-        reset
+        reset,
+        updateStatus
     }
 })()
 
@@ -94,11 +112,11 @@ const gameControl = (() => {
 
     const checkWin = (array) => {
         for (let i = 0; i < winConditions.length; i++){
-        let winArray = winConditions[i].map(x=>array[x])
-        let x = game.checkWin(winArray)
-        if (x == "end") {
-            return
-        }
+            let winArray = winConditions[i].map(x=>array[x])
+            let x = game.checkWin(winArray)
+            if (x == "end") {
+                return
+            }
         }
     }
 
