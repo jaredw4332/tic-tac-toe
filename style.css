@@ -54,14 +54,11 @@ table {
     src: url(media/SquarePeg-Regular.ttf);
 }
 
-/* button to swap from chalkboard to whiteboard */
-
 :root {
     --chalk: #e0dbd1;
     --chalkboard: #3b6b57;
-    --marker: #ce2d30;
-    --whiteboard: #f0f0f0;
     --fontsize: 100px;
+    --fontsizesmall: 60px;
 }
 
 #container {
@@ -69,7 +66,7 @@ table {
     height: 100vh;
     width: 100vw;
     display: grid;
-    grid-template-rows: min-content min-content min-content;
+    grid-template-rows: repeat(4, min-content);
     justify-content: center;
 }
 
@@ -80,13 +77,21 @@ table {
     font-size: var(--fontsize);
 }
 
+#gameStatus {
+    color: var(--chalk);
+    font-size: var(--fontsizesmall);
+    font-family: 'Square Peg', sans-serif;
+    padding-bottom: 10px;
+    justify-self: center;
+}
+
 #gameboardContainer {
     background-color: var(--chalk);
     height: fit-content;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
-    gap: 12px;
+    gap: 8px;
 }
 
 .boardCell {
