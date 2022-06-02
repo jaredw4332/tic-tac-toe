@@ -1,6 +1,6 @@
 const game = (() => {
 
-    const gameboardArray = ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
+    const gameboardArray = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     
     const move = (position) => {
         let target = document.getElementById(position)
@@ -10,6 +10,9 @@ const game = (() => {
         displayController.move(turn, target)
         gameControl.disableButton(target)
         gameControl.checkWin(gameboardArray)
+        if (checkDraw()) {
+            draw()
+        }
     }
 
     const reset = () => {
@@ -35,6 +38,12 @@ const game = (() => {
         }
     }
 
+    const checkDraw = () => {
+        return gameboardArray.every(element => {
+            return typeof element === 'string'
+        })
+    }
+
     const draw = () => { displayController.updateStatus("Draw!") }
 
     const win = () => { 
@@ -49,7 +58,8 @@ const game = (() => {
         move,
         reset,
         checkArray,
-        checkWin
+        checkWin,
+        checkDraw
     }
 })()
 
