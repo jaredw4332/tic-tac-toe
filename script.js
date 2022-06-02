@@ -32,8 +32,12 @@ const game = (() => {
     const checkWin = (array) => {
         xWin = "X,X,X"
         oWin = "O,O,O"
-        if (array == xWin || array == oWin) {
-            win()
+        if (array == xWin) {
+            win("X")
+            return "end"
+        }
+        if (array == oWin) {
+            win("O")
             return "end"
         }
     }
@@ -44,10 +48,14 @@ const game = (() => {
         })
     }
 
-    const draw = () => { displayController.updateStatus("Draw!") }
+    const draw = () => { 
+        displayController.updateStatus("Draw!")
+        displayController.buttonText("NEW GAME")
+    }
 
-    const win = () => { 
-        displayController.updateStatus("Win!") 
+    const win = (winner) => { 
+        displayController.updateStatus(`${winner} wins!`) 
+        displayController.buttonText("NEW GAME")
         for (let i = 0; i < 9; i++) {
             let target = document.getElementById(i)
             gameControl.disableButton(target)
@@ -67,24 +75,25 @@ const game = (() => {
 const displayController = (() => {
 
     const gameStatus = document.getElementById('gameStatus')
+    const resetButton = document.getElementById('resetButton')
 
-    const move = (turn, target) => {
-        target.textContent = turn
-    }
+    const move = (turn, target) => { target.textContent = turn }
 
     const reset = (target) => {
         target.textContent = " "
-        gameStatus.textContent = "Placeholder's turn"
+        gameStatus.textContent = "X's turn"
+        buttonText("RESET")
     }
 
-    const updateStatus = (string) => {
-        gameStatus.textContent = string
-    }
+    const updateStatus = (string) => { gameStatus.textContent = string }
+
+    const buttonText = (string) => { resetButton.textContent = string }
 
     return {
         move,
         reset,
-        updateStatus
+        updateStatus,
+        buttonText
     }
 })()
 
@@ -108,8 +117,10 @@ const gameControl = (() => {
         turn += 1
 
         if(turn % 2 == 0) {
+            displayController.updateStatus("X's turn")
             return "O"
         } else {
+            displayController.updateStatus("O's turn")
             return "X"
         }
     }
