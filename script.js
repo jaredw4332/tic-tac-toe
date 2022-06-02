@@ -27,8 +27,6 @@ const game = (() => {
         }
     }
 
-    const checkArray = (position) => { return gameboardArray[position] }
-
     const checkWin = (array) => {
         xWin = "X,X,X"
         oWin = "O,O,O"
@@ -65,7 +63,6 @@ const game = (() => {
     return {
         move,
         reset,
-        checkArray,
         checkWin,
         checkDraw
     }
