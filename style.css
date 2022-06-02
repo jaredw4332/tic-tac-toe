@@ -104,6 +104,10 @@ table {
     padding: 0%;
 }
 
+.boardCell:hover {
+    filter: contrast(90%);
+}
+
 #resetButton {
     background-color: var(--chalkboard);
     color: var(--chalk);
